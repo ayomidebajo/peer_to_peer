@@ -28,12 +28,12 @@ async fn main() -> Result<(), Box<dyn Error>> {
         swarm.dial(remote)?;
         println!("Dialed {}", addr)
     }
-    // let mut count: i32 = 0;
+    let mut count: i32 = 0;
     loop {
         match swarm.select_next_some().await {
             SwarmEvent::NewListenAddr { address, .. } => println!("Listening on {:?}", address),
             SwarmEvent::Behaviour(event) => {
-                // count += 1;
+                count += 1;
                 println!("{:?} sent {} times", event, count)
             }
             _ => {}
